@@ -25,7 +25,7 @@ export function MetricCard({
   icon: Icon
 }: MetricCardProps) {
   return (
-    <GlassCard className="min-h-36">
+    <GlassCard className="min-h-36 bg-gradient-to-br from-white/[0.075] to-white/[0.025]">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-medium text-slate-400">{label}</p>
@@ -40,7 +40,13 @@ export function MetricCard({
           <Icon className="h-5 w-5" />
         </div>
       </div>
-      <p className="mt-5 text-sm text-slate-300">{detail}</p>
+      <div className="mt-5 flex items-center gap-3">
+        <div className="h-1.5 flex-1 rounded-full bg-white/10">
+          <div className="h-1.5 w-2/3 rounded-full bg-gradient-to-r from-cyan-300 via-emerald-200 to-amber-200" />
+        </div>
+        <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-glow" />
+      </div>
+      <p className="mt-3 text-sm text-slate-300">{detail}</p>
     </GlassCard>
   );
 }

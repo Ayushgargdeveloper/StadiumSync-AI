@@ -24,6 +24,10 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(34, 211, 238, 0.16), transparent 32rem),
+    radial-gradient(circle at 82% 8%, rgba(168, 85, 247, 0.14), transparent 30rem),
+    #070b12;
 }
 
 button,
@@ -33,10 +37,33 @@ a {
 
 @layer components {
   .glass-panel {
-    @apply border border-white/10 bg-white/[0.06] shadow-2xl backdrop-blur-xl;
+    @apply border border-white/10 bg-slate-950/45 shadow-2xl backdrop-blur-2xl;
   }
 
   .control-ring {
     @apply ring-1 ring-white/10 transition hover:ring-cyan-300/40;
+  }
+
+  .scan-grid {
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: linear-gradient(to bottom, black, transparent 88%);
+  }
+
+  .noise-layer {
+    background-image:
+      radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
+      radial-gradient(circle at 75% 65%, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px);
+    background-size: 42px 42px, 58px 58px;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
