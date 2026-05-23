@@ -12,10 +12,15 @@ This file exists so the project can continue from the same point even if the Cod
 - Frontend dev server: Vite on `http://127.0.0.1:5173/`
 - App entry: `/login`
 - Post-login front page: `/` Fan Guide with ticket and seat navigation
+- Judge/problem alignment plan: `docs/JUDGE_ALIGNMENT_AND_245_PLAN.md`
 
 ## Completed Commits
 
 ```text
+33e960f Gate app with ticket holder login
+5ff88af Add ticket login and seat routing flow
+31361e5 Add stadium ticket seat guide
+84f7178 Add offline handoff notes
 d540fbf Polish dashboard control center UI
 32598f1 Build frontend dashboard shell
 a5c1071 Phase 0 repo baseline
@@ -120,7 +125,20 @@ npm run build --workspace frontend
 
 ## Next Recommended Phase
 
-Phase 3 should focus on backend API and Firebase integration:
+Immediate priority before 2:45 PM:
+
+- Follow `docs/JUDGE_ALIGNMENT_AND_245_PLAN.md`.
+- Keep the demo centered on: secure ticket login -> Fan Guide -> Get to my seat -> Operations command center.
+- Align every feature to the shared problem statement:
+  - dangerous bottlenecks,
+  - security vulnerabilities,
+  - pre/post-match congestion,
+  - fragmented manual operations,
+  - weather shifts,
+  - emerging threats,
+  - integrated real-time command platform.
+
+After the live pitch, Phase 3 should focus on backend API and Firebase integration:
 
 - Connect Firebase client config from environment variables.
 - Add auth-aware API scaffolding.
