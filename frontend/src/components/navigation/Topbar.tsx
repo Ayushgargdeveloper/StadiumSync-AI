@@ -26,7 +26,8 @@ const statusItems = [
     label: "Alerts",
     value: String(topbarStats.activeAlerts),
     icon: Bell,
-    className: "text-amber-200"
+    className: "text-amber-200",
+    path: "/emergency-center"
   }
 ];
 
@@ -61,20 +62,42 @@ export function Topbar() {
         </div>
 
         <div className="grid grid-cols-2 gap-2 md:grid-cols-5 xl:min-w-[680px]">
-          {statusItems.map((item) => (
-            <div
-              key={item.label}
-              className="min-w-0 rounded-lg border border-white/10 bg-white/[0.07] px-3 py-2 shadow-lg shadow-black/20"
-            >
-              <div className="flex items-center gap-2 text-xs text-slate-400">
-                <item.icon className={`h-3.5 w-3.5 ${item.className}`} />
-                {item.label}
+          {statusItems.map((item) => {
+            const content = (
+              <>
+                <div className="flex items-center gap-2 text-xs text-slate-400">
+                  <item.icon className={`h-3.5 w-3.5 ${item.className}`} />
+                  {item.label}
+                </div>
+                <p className="mt-1 text-sm font-semibold leading-tight text-white">
+                  {item.value}
+                </p>
+              </>
+            );
+
+            if ("path" in item && item.path) {
+              return (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => navigate(item.path)}
+                  className="min-w-0 rounded-lg border border-amber-300/20 bg-amber-300/[0.08] px-3 py-2 text-left shadow-lg shadow-black/20 transition hover:border-amber-200/50 hover:bg-amber-300/[0.12]"
+                  aria-label={`Open ${item.value} active alerts`}
+                >
+                  {content}
+                </button>
+              );
+            }
+
+            return (
+              <div
+                key={item.label}
+                className="min-w-0 rounded-lg border border-white/10 bg-white/[0.07] px-3 py-2 shadow-lg shadow-black/20"
+              >
+                {content}
               </div>
-              <p className="mt-1 text-sm font-semibold leading-tight text-white">
-                {item.value}
-              </p>
-            </div>
-          ))}
+            );
+          })}
           <button
             type="button"
             onClick={handleLogout}
