@@ -30,7 +30,9 @@ a5c1071 Phase 0 repo baseline
 - Glassmorphism components
 - Responsive sidebar/topbar layout
 - Fan-facing ticket navigator on the front page
+- Demo phone-number ticket login
 - Stadium structure preview with clickable ticket sections
+- "Get to my seat" route mode with highlighted stadium path
 - Dummy gate, seat area, row, aisle, walking time, parking, and amenity guidance
 - Dashboard pages:
   - Dashboard
@@ -103,6 +105,7 @@ Phase 3 should focus on backend API and Firebase integration:
 - Add auth-aware API scaffolding.
 - Add Firestore-ready data contracts.
 - Replace dummy dashboard data with API-fed data.
+- Replace demo ticket login with Firebase Auth phone OTP and Firestore ticket lookup.
 - Configure GitHub remote and push the public repository.
 
 ## GitHub Remote Still Needed

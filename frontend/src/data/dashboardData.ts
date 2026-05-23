@@ -174,3 +174,36 @@ export const ticketSections = [
     coordinates: { x: "50%", y: "76%" }
   }
 ] as const;
+
+export const bookedTickets = [
+  {
+    phone: "9876543210",
+    holder: "Aarav Mehta",
+    ticketId: "SSAI-FAL-118-0921",
+    match: "Falcons vs Titans",
+    seat: "Section 118, Row 8, Seat 14",
+    section: "118",
+    status: "Verified",
+    entryWindow: "6:15 PM - 6:45 PM"
+  },
+  {
+    phone: "9123456780",
+    holder: "Maya Rao",
+    ticketId: "SSAI-FAL-204-1187",
+    match: "Falcons vs Titans",
+    seat: "Section 204, Row 3, Seat 6",
+    section: "204",
+    status: "Verified",
+    entryWindow: "6:00 PM - 6:35 PM"
+  },
+  {
+    phone: "9988776655",
+    holder: "Kabir Singh",
+    ticketId: "SSAI-FAL-332-4104",
+    match: "Falcons vs Titans",
+    seat: "Section 332, Row 16, Seat 22",
+    section: "332",
+    status: "Verified",
+    entryWindow: "5:55 PM - 6:30 PM"
+  }
+] as const;
