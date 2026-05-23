@@ -9,7 +9,7 @@ export function AppLayout() {
       <div className="scan-grid pointer-events-none fixed inset-0 -z-10 opacity-70" />
       <div className="noise-layer pointer-events-none fixed inset-0 -z-10 opacity-30" />
       <div className="pointer-events-none fixed left-72 top-0 -z-10 h-72 w-72 rounded-full bg-cyan-300/10 blur-3xl" />
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen flex-col lg:flex-row">
         <Sidebar />
         <div className="flex min-w-0 flex-1 flex-col lg:pl-72">
           <Topbar />

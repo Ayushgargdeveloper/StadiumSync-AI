@@ -115,3 +115,62 @@ export const liveSignals = [
   { label: "Open incidents", value: "7", icon: ShieldAlert },
   { label: "AI confidence", value: "94%", icon: Bot }
 ];
+
+export const ticketSections = [
+  {
+    section: "118",
+    stand: "Lower Bowl",
+    side: "East Touchline",
+    gate: "Gate C",
+    entryTime: "45 min before kickoff",
+    aisle: "Aisle 12",
+    rowRange: "Rows 1-18",
+    walkTime: "6 min",
+    nearestParking: "Lot E2",
+    amenities: ["Restrooms E-14", "Food Court 3", "First Aid 118"],
+    note: "Best route uses the East Concourse escalator, then left at the cyan wayfinding pillar.",
+    coordinates: { x: "73%", y: "48%" }
+  },
+  {
+    section: "204",
+    stand: "Club Level",
+    side: "North Arc",
+    gate: "Gate A",
+    entryTime: "60 min before kickoff",
+    aisle: "Aisle 27",
+    rowRange: "Rows 1-12",
+    walkTime: "8 min",
+    nearestParking: "Lot N1",
+    amenities: ["Club Lounge N", "Restrooms N-07", "Merch Hub North"],
+    note: "Use the north glass elevators for the shortest accessible path to club seating.",
+    coordinates: { x: "50%", y: "24%" }
+  },
+  {
+    section: "332",
+    stand: "Upper Deck",
+    side: "West Corner",
+    gate: "Gate D",
+    entryTime: "70 min before kickoff",
+    aisle: "Aisle 41",
+    rowRange: "Rows 6-29",
+    walkTime: "11 min",
+    nearestParking: "Lot W4",
+    amenities: ["Restrooms W-22", "Snack Bar 9", "Family Services"],
+    note: "West ramp is smoother during peak entry than the central stair tower.",
+    coordinates: { x: "30%", y: "61%" }
+  },
+  {
+    section: "VIP-07",
+    stand: "Premium Suite",
+    side: "South Sideline",
+    gate: "Gate S",
+    entryTime: "90 min before kickoff",
+    aisle: "Suite Lift 2",
+    rowRange: "Suite level",
+    walkTime: "4 min",
+    nearestParking: "VIP South",
+    amenities: ["Suite Lounge", "Private Restrooms", "Concierge Desk"],
+    note: "Enter through the south premium lobby and follow the gold suite corridor.",
+    coordinates: { x: "50%", y: "76%" }
+  }
+] as const;

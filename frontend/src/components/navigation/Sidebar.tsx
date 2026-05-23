@@ -5,7 +5,7 @@ import { cn } from "../../utils/cn";
 
 export function Sidebar() {
   return (
-    <aside className="glass-panel fixed inset-x-3 top-3 z-30 rounded-lg p-3 lg:inset-y-4 lg:left-4 lg:right-auto lg:w-64">
+    <aside className="glass-panel sticky top-3 z-30 mx-3 mt-3 rounded-lg p-3 lg:fixed lg:inset-y-4 lg:left-4 lg:right-auto lg:mx-0 lg:mt-0 lg:w-64">
       <div className="pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/70 to-transparent" />
       <div className="flex items-center justify-between gap-3 lg:mb-8">
         <div className="flex items-center gap-3">

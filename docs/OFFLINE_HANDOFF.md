@@ -6,7 +6,7 @@ This file exists so the project can continue from the same point even if the Cod
 
 - Workspace: `C:\Users\pc\OneDrive\Documents\StadiumSync Ai`
 - Branch: `master`
-- Latest commit: `d540fbf Polish dashboard control center UI`
+- Latest commit: run `git log --oneline -5` for the newest local checkpoint
 - Working tree at handoff: clean
 - GitHub remote: not configured yet
 - Frontend dev server: Vite on `http://127.0.0.1:5173/`
@@ -29,6 +29,9 @@ a5c1071 Phase 0 repo baseline
 - Futuristic dark dashboard UI
 - Glassmorphism components
 - Responsive sidebar/topbar layout
+- Fan-facing ticket navigator on the front page
+- Stadium structure preview with clickable ticket sections
+- Dummy gate, seat area, row, aisle, walking time, parking, and amenity guidance
 - Dashboard pages:
   - Dashboard
   - Crowd Analytics

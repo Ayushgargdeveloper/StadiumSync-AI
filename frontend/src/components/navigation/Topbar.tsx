@@ -32,7 +32,7 @@ export function Topbar() {
   return (
     <header className="sticky top-0 z-20 border-b border-white/10 bg-cockpit/65 px-4 py-3 backdrop-blur-2xl sm:px-6 lg:px-8">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
-        <div className="pt-56 sm:pt-44 lg:pt-0">
+        <div>
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
             <Activity className="h-4 w-4" />
             Live command center
