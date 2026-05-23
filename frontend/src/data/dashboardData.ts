@@ -121,6 +121,57 @@ export const liveSignals = [
   { label: "AI confidence", value: "94%", icon: Bot }
 ];
 
+export const commandRecommendations = [
+  {
+    title: "Divert Gate C overflow",
+    priority: "High",
+    impact: "Reduces East Concourse pressure by 18%",
+    action: "Push Section 118 late arrivals toward Gate D auxiliary lane."
+  },
+  {
+    title: "Pre-stage medical team",
+    priority: "Medium",
+    impact: "Cuts response time near Section 118",
+    action: "Move Medical Alpha to East lower-bowl tunnel."
+  },
+  {
+    title: "Weather-aware concourse routing",
+    priority: "Medium",
+    impact: "Keeps fans on covered path",
+    action: "Update Fan Guide route copy for open seating and upper deck."
+  }
+] as const;
+
+export const bottleneckPredictions = [
+  {
+    zone: "East Concourse",
+    risk: "Severe",
+    eta: "9 min",
+    cause: "Gate C scan rate below arrival rate",
+    diversion: "Open Gate D bypass and pause plaza inflow"
+  },
+  {
+    zone: "North Gate",
+    risk: "Watch",
+    eta: "14 min",
+    cause: "Merch queue spilling toward entry lane",
+    diversion: "Shift volunteers to lane splitters"
+  },
+  {
+    zone: "West Plaza",
+    risk: "Stable",
+    eta: "22 min",
+    cause: "Post-over movement toward food court",
+    diversion: "No diversion needed"
+  }
+] as const;
+
+export const responseAutomations = [
+  { label: "Security dispatch", value: "2 teams routed", status: "Active" },
+  { label: "Fan route updates", value: "1,248 devices", status: "Queued" },
+  { label: "Volunteer tasks", value: "6 instructions", status: "Sent" }
+] as const;
+
 export const ticketSections = [
   {
     section: "118",

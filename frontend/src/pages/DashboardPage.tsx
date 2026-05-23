@@ -1,10 +1,18 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, BrainCircuit, RadioTower } from "lucide-react";
+import { ArrowUpRight, BrainCircuit, Route, ShieldAlert, RadioTower } from "lucide-react";
 import { StadiumPulseMap } from "../components/dashboard/StadiumPulseMap";
 import { GlassCard } from "../components/ui/GlassCard";
 import { MetricCard } from "../components/ui/MetricCard";
 import { PageHeader } from "../components/ui/PageHeader";
-import { alerts, liveSignals, overviewCards, zones } from "../data/dashboardData";
+import {
+  alerts,
+  bottleneckPredictions,
+  commandRecommendations,
+  liveSignals,
+  overviewCards,
+  responseAutomations,
+  zones
+} from "../data/dashboardData";
 
 export function DashboardPage() {
   return (
@@ -14,9 +22,9 @@ export function DashboardPage() {
           <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-cyan-300/15 blur-3xl" />
           <div className="absolute bottom-0 left-10 h-32 w-32 rounded-full bg-fuchsia-400/10 blur-3xl" />
           <PageHeader
-            eyebrow="Dashboard overview"
-            title="Stadium intelligence at match speed"
-            description="Live occupancy, movement pressure, weather risk, and incident response signals are fused into one adaptive command surface."
+            eyebrow="Operations command center"
+            title="Predict bottlenecks before they become emergencies"
+            description="A unified live view for organizers to manage crowd surges, security vulnerabilities, weather shifts, and response teams during the match."
           />
           <div className="grid grid-cols-3 gap-3">
             {[
@@ -49,6 +57,75 @@ export function DashboardPage() {
         {overviewCards.map((card) => (
           <MetricCard key={card.label} {...card} />
         ))}
+      </section>
+
+      <section className="mt-5 grid gap-5 xl:grid-cols-[0.95fr_1.05fr]">
+        <GlassCard className="bg-gradient-to-br from-amber-300/[0.08] via-white/[0.045] to-rose-300/[0.04]">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-semibold text-white">AI Command Recommendations</h2>
+              <p className="text-sm text-slate-400">Actionable interventions from live ticketing, density, and weather signals</p>
+            </div>
+            <BrainCircuit className="h-6 w-6 text-cyan-200" />
+          </div>
+          <div className="space-y-3">
+            {commandRecommendations.map((recommendation) => (
+              <div key={recommendation.title} className="rounded-lg border border-white/10 bg-slate-950/40 p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="font-semibold text-white">{recommendation.title}</p>
+                    <p className="mt-1 text-sm text-slate-400">{recommendation.impact}</p>
+                  </div>
+                  <span className="rounded-full border border-amber-300/20 bg-amber-300/10 px-2.5 py-1 text-xs font-semibold text-amber-100">
+                    {recommendation.priority}
+                  </span>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-slate-300">{recommendation.action}</p>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
+
+        <GlassCard className="bg-gradient-to-br from-cyan-300/[0.07] to-blue-400/[0.035]">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-semibold text-white">Predicted Bottlenecks</h2>
+              <p className="text-sm text-slate-400">Pre/post-match congestion forecast with diversion plan</p>
+            </div>
+            <Route className="h-6 w-6 text-emerald-200" />
+          </div>
+          <div className="space-y-3">
+            {bottleneckPredictions.map((prediction) => (
+              <div key={prediction.zone} className="rounded-lg border border-white/10 bg-black/25 p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="font-semibold text-white">{prediction.zone}</p>
+                  <span className="text-sm text-cyan-200">ETA {prediction.eta}</span>
+                </div>
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Cause</p>
+                    <p className="mt-1 text-sm text-slate-300">{prediction.cause}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Diversion</p>
+                    <p className="mt-1 text-sm text-slate-300">{prediction.diversion}</p>
+                  </div>
+                </div>
+                <div className="mt-3 h-1.5 rounded-full bg-white/10">
+                  <div
+                    className={`h-1.5 rounded-full ${
+                      prediction.risk === "Severe"
+                        ? "w-[92%] bg-rose-300"
+                        : prediction.risk === "Watch"
+                          ? "w-[64%] bg-amber-300"
+                          : "w-[38%] bg-emerald-300"
+                    }`}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
       </section>
 
       <section className="mt-5 grid gap-5 xl:grid-cols-[1.35fr_0.65fr]">
@@ -110,6 +187,19 @@ export function DashboardPage() {
             ))}
           </div>
         </GlassCard>
+      </section>
+
+      <section className="mt-5 grid gap-4 md:grid-cols-3">
+        {responseAutomations.map((automation) => (
+          <GlassCard key={automation.label} className="flex items-center justify-between gap-4">
+            <div>
+              <p className="text-sm text-slate-400">{automation.label}</p>
+              <p className="mt-2 text-2xl font-semibold text-white">{automation.value}</p>
+              <p className="mt-1 text-xs font-semibold text-emerald-200">{automation.status}</p>
+            </div>
+            <ShieldAlert className="h-7 w-7 text-emerald-200" />
+          </GlassCard>
+        ))}
       </section>
 
       <section className="mt-5 grid gap-4 md:grid-cols-3">
