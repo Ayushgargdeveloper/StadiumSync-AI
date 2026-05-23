@@ -1,0 +1,19 @@
+{
+  "name": "stadiumsync-ai",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace frontend",
+    "build": "npm run build --workspace frontend && npm run build --workspace backend",
+    "lint": "npm run lint --workspace frontend && npm run lint --workspace backend",
+    "firebase:emulators": "firebase emulators:start",
+    "firebase:deploy": "firebase deploy"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
