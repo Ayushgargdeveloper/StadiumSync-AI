@@ -42,6 +42,26 @@ This repo is configured for Firebase Hosting with a frontend build served from `
 
 Use a Firebase project alias or CI/CD environment variables for account switching. Keep real project IDs, API keys, secrets, and service credentials out of source control.
 
+Quick deploy checklist:
+
+```powershell
+firebase login
+Copy-Item .firebaserc.example .firebaserc
+# Edit .firebaserc and replace your-firebase-project-id
+npm run build
+npm run firebase:deploy
+```
+
+Useful deployment scripts:
+
+```powershell
+npm run firebase:preview
+npm run firebase:deploy:hosting
+npm run firebase:deploy:functions
+```
+
+Detailed GCP/Firebase upload steps are in [docs/GCP_FIREBASE_DEPLOYMENT.md](docs/GCP_FIREBASE_DEPLOYMENT.md).
+
 ## Phase Workflow
 
 Each phase should be committed independently and pushed to the public GitHub repo after validation.
