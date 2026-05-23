@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, BrainCircuit, RadioTower } from "lucide-react";
 import { StadiumPulseMap } from "../components/dashboard/StadiumPulseMap";
-import { TicketSeatGuide } from "../components/dashboard/TicketSeatGuide";
 import { GlassCard } from "../components/ui/GlassCard";
 import { MetricCard } from "../components/ui/MetricCard";
 import { PageHeader } from "../components/ui/PageHeader";
@@ -45,8 +44,6 @@ export function DashboardPage() {
 
         <StadiumPulseMap />
       </section>
-
-      <TicketSeatGuide />
 
       <section className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {overviewCards.map((card) => (

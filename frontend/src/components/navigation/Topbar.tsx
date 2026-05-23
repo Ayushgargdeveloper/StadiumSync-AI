@@ -1,4 +1,6 @@
 import { Activity, Bell, ShieldCheck, Trophy, UsersRound } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/AuthContext";
 import { topbarStats } from "../../data/dashboardData";
 
 const statusItems = [
@@ -29,6 +31,14 @@ const statusItems = [
 ];
 
 export function Topbar() {
+  const { ticket, logout } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate("/login", { replace: true });
+  }
+
   return (
     <header className="sticky top-0 z-20 border-b border-white/10 bg-cockpit/65 px-4 py-3 backdrop-blur-2xl sm:px-6 lg:px-8">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
@@ -38,11 +48,11 @@ export function Topbar() {
             Live command center
           </div>
           <p className="mt-1 text-sm text-slate-400">
-            AI-assisted stadium safety, flow, and incident coordination
+            {ticket ? `${ticket.holder} - ${ticket.seat}` : "AI-assisted stadium safety and fan guidance"}
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 md:grid-cols-4 xl:min-w-[560px]">
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-5 xl:min-w-[680px]">
           {statusItems.map((item) => (
             <div
               key={item.label}
@@ -57,6 +67,14 @@ export function Topbar() {
               </p>
             </div>
           ))}
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="rounded-lg border border-white/10 bg-white/[0.07] px-3 py-2 text-left text-sm font-semibold text-slate-200 shadow-lg shadow-black/20 transition hover:border-cyan-300/30 hover:text-white"
+          >
+            <span className="block text-xs font-normal text-slate-400">Access</span>
+            Sign out
+          </button>
         </div>
       </div>
     </header>

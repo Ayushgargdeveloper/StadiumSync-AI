@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   ListChecks,
   RadioTower,
+  Route,
   ShieldAlert,
   Siren,
   UsersRound
@@ -20,7 +21,8 @@ export const topbarStats = {
 };
 
 export const navigationItems = [
-  { label: "Dashboard", path: "/", icon: LayoutDashboard },
+  { label: "Fan Guide", path: "/", icon: Route },
+  { label: "Operations", path: "/operations", icon: LayoutDashboard },
   { label: "Crowd Analytics", path: "/crowd-analytics", icon: UsersRound },
   { label: "Emergency Center", path: "/emergency-center", icon: Siren },
   { label: "AI Agents", path: "/ai-agents", icon: Bot },

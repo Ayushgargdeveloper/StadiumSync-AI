@@ -8,22 +8,27 @@ import {
   LockKeyhole,
   MapPinned,
   Navigation,
-  Phone,
   TicketCheck,
   Utensils
 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useAuth } from "../../auth/AuthContext";
 import { bookedTickets, ticketSections } from "../../data/dashboardData";
 import { GlassCard } from "../ui/GlassCard";
 
 type TicketSection = (typeof ticketSections)[number]["section"];
 type BookedTicket = (typeof bookedTickets)[number];
 
-export function TicketSeatGuide() {
-  const [selectedSection, setSelectedSection] = useState<TicketSection>(ticketSections[0].section);
-  const [phoneNumber, setPhoneNumber] = useState("9876543210");
-  const [activeTicket, setActiveTicket] = useState<BookedTicket | null>(bookedTickets[0]);
-  const [loginMessage, setLoginMessage] = useState("Demo login ready. Try 9876543210.");
+type TicketSeatGuideProps = {
+  mode?: "authenticated" | "demo";
+};
+
+export function TicketSeatGuide({ mode = "demo" }: TicketSeatGuideProps) {
+  const { ticket } = useAuth();
+  const fallbackTicket = bookedTickets[0];
+  const activeTicket: BookedTicket | null = mode === "authenticated" ? ticket : fallbackTicket;
+  const initialSection = (activeTicket?.section ?? ticketSections[0].section) as TicketSection;
+  const [selectedSection, setSelectedSection] = useState<TicketSection>(initialSection);
   const [routeMode, setRouteMode] = useState(false);
 
   const selectedTicket = useMemo(
@@ -31,25 +36,8 @@ export function TicketSeatGuide() {
     [selectedSection]
   );
 
-  function fetchTicketByPhone() {
-    const normalizedPhone = phoneNumber.replace(/\D/g, "");
-    const matchedTicket = bookedTickets.find((ticket) => ticket.phone === normalizedPhone);
-
-    if (!matchedTicket) {
-      setActiveTicket(null);
-      setRouteMode(false);
-      setLoginMessage("No demo ticket found for this number.");
-      return;
-    }
-
-    setActiveTicket(matchedTicket);
-    setSelectedSection(matchedTicket.section);
-    setRouteMode(false);
-    setLoginMessage("Ticket verified. Seat guidance is unlocked.");
-  }
-
   return (
-    <GlassCard className="mt-5 bg-gradient-to-br from-cyan-300/[0.08] via-white/[0.045] to-emerald-300/[0.04]">
+    <GlassCard className="bg-gradient-to-br from-cyan-300/[0.08] via-white/[0.045] to-emerald-300/[0.04]">
       <div className="grid gap-5 xl:grid-cols-[0.9fr_1.1fr]">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">
@@ -59,43 +47,19 @@ export function TicketSeatGuide() {
             Login, fetch ticket, get to the seat
           </h2>
           <p className="mt-3 text-sm leading-6 text-slate-300">
-            Login with the phone number used for booking. StadiumSync AI fetches the ticket,
-            verifies the section, and prepares a route to the correct seat.
+            StadiumSync AI uses the verified ticket to show the correct gate,
+            section, route, nearby facilities, and seat guidance.
           </p>
 
           <div className="mt-5 rounded-lg border border-cyan-300/20 bg-slate-950/55 p-4">
             <div className="flex items-center gap-2 text-sm font-semibold text-white">
               <LockKeyhole className="h-4 w-4 text-cyan-200" />
-              Secure ticket login
+              Secure ticket access
             </div>
-            <label className="mt-4 block text-sm font-medium text-slate-300" htmlFor="ticket-phone">
-              Booking phone number
-            </label>
-            <div className="mt-2 flex flex-col gap-2 sm:flex-row">
-              <div className="relative flex-1">
-                <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-cyan-200" />
-                <input
-                  id="ticket-phone"
-                  inputMode="numeric"
-                  value={phoneNumber}
-                  onChange={(event) => setPhoneNumber(event.target.value)}
-                  placeholder="Enter phone number"
-                  className="w-full rounded-lg border border-white/10 bg-black/30 py-3 pl-10 pr-4 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-200 focus:shadow-glow"
-                />
-              </div>
-              <button
-                type="button"
-                onClick={fetchTicketByPhone}
-                className="rounded-lg border border-cyan-300/30 bg-cyan-300 px-4 py-3 text-sm font-bold text-slate-950 shadow-glow transition hover:bg-cyan-200"
-              >
-                Fetch ticket
-              </button>
-            </div>
-            <p className="mt-3 text-xs text-slate-400">
-              Demo numbers: 9876543210, 9123456780, 9988776655
-            </p>
-            <p className={`mt-2 text-sm ${activeTicket ? "text-emerald-200" : "text-amber-200"}`}>
-              {loginMessage}
+            <p className="mt-3 text-sm leading-6 text-slate-300">
+              {mode === "authenticated"
+                ? "This panel is unlocked from the phone-number login on the security page."
+                : "Demo mode is using a sample ticket until production auth is connected."}
             </p>
           </div>
 
@@ -130,9 +94,7 @@ export function TicketSeatGuide() {
               </div>
             </motion.div>
           ) : (
-            <div className="mt-4 rounded-lg border border-amber-300/20 bg-amber-300/10 p-4 text-sm text-amber-100">
-              Enter a demo booking number to load ticket details and unlock seat routing.
-            </div>
+            null
           )}
 
           <label className="mt-5 block text-sm font-medium text-slate-300" htmlFor="ticket-section">
