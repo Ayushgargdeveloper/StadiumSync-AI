@@ -6,6 +6,7 @@ import { CrowdAnalyticsPage } from "../pages/CrowdAnalyticsPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { EmergencyCenterPage } from "../pages/EmergencyCenterPage";
 import { FanGuidePage } from "../pages/FanGuidePage";
+import { HelpPage } from "../pages/HelpPage";
 import { LoginPage } from "../pages/LoginPage";
 import { LogsPage } from "../pages/LogsPage";
 import { WeatherRiskPage } from "../pages/WeatherRiskPage";
@@ -17,6 +18,7 @@ export function App() {
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
           <Route index element={<FanGuidePage />} />
+          <Route path="help" element={<HelpPage />} />
           <Route path="operations" element={<DashboardPage />} />
           <Route path="crowd-analytics" element={<CrowdAnalyticsPage />} />
           <Route path="emergency-center" element={<EmergencyCenterPage />} />

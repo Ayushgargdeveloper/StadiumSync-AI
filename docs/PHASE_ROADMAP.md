@@ -238,6 +238,8 @@ Delivered:
 - AI Agents page now shows signal inputs, recommended actions, confidence, and collaborative roles.
 - Added Ticket Router agent for fan route personalization.
 - Agent story now connects ticketing, density, weather, dispatch, and routing.
+- Help/SOS page adds fan emergency assistance and notification permission flow.
+- Emergency Center adds fan broadcast, police/fire/medical messaging, and gate update controls.
 
 Demo proof:
 

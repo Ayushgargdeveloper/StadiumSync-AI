@@ -4,6 +4,7 @@ import {
   Bot,
   CloudLightning,
   Gauge,
+  HandHeart,
   LayoutDashboard,
   ListChecks,
   RadioTower,
@@ -25,6 +26,7 @@ export const topbarStats = {
 
 export const navigationItems = [
   { label: "Fan Guide", path: "/", icon: Route },
+  { label: "Help", path: "/help", icon: HandHeart },
   { label: "Operations", path: "/operations", icon: LayoutDashboard },
   { label: "Crowd Analytics", path: "/crowd-analytics", icon: UsersRound },
   { label: "Emergency Center", path: "/emergency-center", icon: Siren },
@@ -206,6 +208,39 @@ export const responseAutomations = [
   { label: "Security dispatch", value: "2 teams routed", status: "Active" },
   { label: "Fan route updates", value: "1,248 devices", status: "Queued" },
   { label: "Volunteer tasks", value: "6 instructions", status: "Sent" }
+] as const;
+
+export const emergencyBroadcasts = [
+  {
+    audience: "All fans",
+    channel: "Push + SMS fallback",
+    message: "Emergency route update: avoid Gate C, follow staff to Gate D bypass.",
+    status: "Ready"
+  },
+  {
+    audience: "Police control",
+    channel: "Command relay",
+    message: "Crowd surge risk at East Concourse. Request perimeter support.",
+    status: "Ready"
+  },
+  {
+    audience: "Fire response",
+    channel: "Emergency desk",
+    message: "Keep Gate D service lane open for emergency access.",
+    status: "Ready"
+  },
+  {
+    audience: "Medical teams",
+    channel: "Dispatch alert",
+    message: "Medical Alpha to Section 118 tunnel, standby near lower bowl.",
+    status: "Ready"
+  }
+] as const;
+
+export const gateEmergencyUpdates = [
+  { gate: "Gate C", status: "Restricted", instruction: "Stop inflow and redirect late arrivals." },
+  { gate: "Gate D", status: "Open bypass", instruction: "Use as emergency diversion route." },
+  { gate: "Gate A", status: "Normal", instruction: "Continue standard scanning." }
 ] as const;
 
 export const ticketSections = [

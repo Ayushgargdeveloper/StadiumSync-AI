@@ -44,9 +44,13 @@ a5c1071 Phase 0 repo baseline
 - Local browser session persistence through `localStorage`
 - Stadium structure preview with clickable ticket sections
 - "Get to my seat" route mode with highlighted stadium path
+- Fan Help/SOS page with browser notification permission request
+- Emergency broadcast console for all fans, police, fire, and medical teams
+- Gate emergency update panel for route/gate changes
 - Dummy gate, seat area, row, aisle, walking time, parking, and amenity guidance
 - Dashboard pages:
   - Dashboard
+  - Help
   - Crowd Analytics
   - Emergency Center
   - AI Agents

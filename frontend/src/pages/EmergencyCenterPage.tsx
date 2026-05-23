@@ -1,7 +1,7 @@
-import { Ambulance, Radio, ShieldAlert } from "lucide-react";
+import { Ambulance, BellRing, Flame, Radio, ShieldAlert } from "lucide-react";
 import { GlassCard } from "../components/ui/GlassCard";
 import { PageHeader } from "../components/ui/PageHeader";
-import { alerts, responseAutomations } from "../data/dashboardData";
+import { alerts, emergencyBroadcasts, gateEmergencyUpdates, responseAutomations } from "../data/dashboardData";
 
 export function EmergencyCenterPage() {
   return (
@@ -20,6 +20,52 @@ export function EmergencyCenterPage() {
             <p className="mt-2 text-sm font-semibold text-emerald-200">{automation.status}</p>
           </GlassCard>
         ))}
+      </section>
+
+      <section className="mt-5 grid gap-5 xl:grid-cols-[1.05fr_0.95fr]">
+        <GlassCard className="bg-gradient-to-br from-rose-300/[0.08] to-cyan-300/[0.035]">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-semibold text-white">Emergency Broadcast Console</h2>
+              <p className="text-sm text-slate-400">Send SOS, gate updates, and agency messages</p>
+            </div>
+            <BellRing className="h-6 w-6 text-rose-200" />
+          </div>
+          <div className="mt-4 space-y-3">
+            {emergencyBroadcasts.map((broadcast) => (
+              <div key={broadcast.audience} className="rounded-lg border border-white/10 bg-black/25 p-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="font-semibold text-white">{broadcast.audience}</p>
+                    <p className="text-xs text-cyan-200">{broadcast.channel}</p>
+                  </div>
+                  <span className="rounded-full bg-emerald-300/10 px-2 py-1 text-xs font-semibold text-emerald-200">
+                    {broadcast.status}
+                  </span>
+                </div>
+                <p className="mt-2 text-sm text-slate-300">{broadcast.message}</p>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
+
+        <GlassCard>
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-lg font-semibold text-white">Gate Emergency Updates</h2>
+            <Flame className="h-6 w-6 text-amber-200" />
+          </div>
+          <div className="mt-4 space-y-3">
+            {gateEmergencyUpdates.map((gate) => (
+              <div key={gate.gate} className="rounded-lg border border-white/10 bg-white/[0.045] p-3">
+                <div className="flex items-center justify-between">
+                  <p className="font-semibold text-white">{gate.gate}</p>
+                  <span className="text-sm text-cyan-200">{gate.status}</span>
+                </div>
+                <p className="mt-2 text-sm text-slate-300">{gate.instruction}</p>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
       </section>
 
       <section className="mt-5 grid gap-5 xl:grid-cols-[0.9fr_1.1fr]">
