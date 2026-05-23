@@ -92,6 +92,12 @@ export const alerts = [
     area: "Open seating",
     severity: "Medium",
     time: "14 min ago"
+  },
+  {
+    title: "Gate C scan lane slowdown",
+    area: "Gate C",
+    severity: "High",
+    time: "18 min ago"
   }
 ];
 

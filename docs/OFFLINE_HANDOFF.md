@@ -47,6 +47,10 @@ a5c1071 Phase 0 repo baseline
 - Fan Help/SOS page with browser notification permission request
 - Emergency broadcast console for all fans, police, fire, and medical teams
 - Gate emergency update panel for route/gate changes
+- Emergency broadcast package button with sent-state feedback
+- Incident queue now matches the 4-alert topbar count and supports incident selection
+- Gate update buttons render for Gate C, Gate D, and Gate A
+- Browser-verified navigation across Fan Guide, Help, Operations, Crowd Analytics, Emergency Center, AI Agents, Weather Risk, and Logs
 - Dummy gate, seat area, row, aisle, walking time, parking, and amenity guidance
 - Dashboard pages:
   - Dashboard
@@ -134,6 +138,16 @@ Verify full project build:
 
 ```powershell
 npm run build
+```
+
+Latest verification:
+
+```text
+npm run build passed for frontend and backend.
+All app routes were opened in the browser without runtime/404 errors.
+Topbar Alerts button navigates to /emergency-center.
+Help SOS button shows the SOS logged confirmation.
+Emergency broadcast button updates the broadcast package to sent.
 ```
 
 ## Next Recommended Phase

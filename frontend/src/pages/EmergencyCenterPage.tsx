@@ -1,9 +1,13 @@
-import { Ambulance, BellRing, Flame, Radio, ShieldAlert } from "lucide-react";
+import { useState } from "react";
+import { Ambulance, BellRing, CheckCircle2, Flame, Radio, Send, ShieldAlert } from "lucide-react";
 import { GlassCard } from "../components/ui/GlassCard";
 import { PageHeader } from "../components/ui/PageHeader";
 import { alerts, emergencyBroadcasts, gateEmergencyUpdates, responseAutomations } from "../data/dashboardData";
 
 export function EmergencyCenterPage() {
+  const [broadcastSent, setBroadcastSent] = useState(false);
+  const [selectedIncident, setSelectedIncident] = useState(alerts[0].title);
+
   return (
     <div>
       <PageHeader
@@ -31,6 +35,14 @@ export function EmergencyCenterPage() {
             </div>
             <BellRing className="h-6 w-6 text-rose-200" />
           </div>
+          <button
+            type="button"
+            onClick={() => setBroadcastSent(true)}
+            className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-rose-200/30 bg-rose-300 px-4 py-3 text-sm font-bold text-slate-950 shadow-glow transition hover:bg-rose-200"
+          >
+            {broadcastSent ? <CheckCircle2 className="h-4 w-4" /> : <Send className="h-4 w-4" />}
+            {broadcastSent ? "Broadcast package sent" : "Send emergency broadcast package"}
+          </button>
           <div className="mt-4 space-y-3">
             {emergencyBroadcasts.map((broadcast) => (
               <div key={broadcast.audience} className="rounded-lg border border-white/10 bg-black/25 p-3">
@@ -40,7 +52,7 @@ export function EmergencyCenterPage() {
                     <p className="text-xs text-cyan-200">{broadcast.channel}</p>
                   </div>
                   <span className="rounded-full bg-emerald-300/10 px-2 py-1 text-xs font-semibold text-emerald-200">
-                    {broadcast.status}
+                    {broadcastSent ? "Sent" : broadcast.status}
                   </span>
                 </div>
                 <p className="mt-2 text-sm text-slate-300">{broadcast.message}</p>
@@ -62,6 +74,12 @@ export function EmergencyCenterPage() {
                   <span className="text-sm text-cyan-200">{gate.status}</span>
                 </div>
                 <p className="mt-2 text-sm text-slate-300">{gate.instruction}</p>
+                <button
+                  type="button"
+                  className="mt-3 rounded-lg border border-cyan-300/20 bg-cyan-300/10 px-3 py-2 text-xs font-semibold text-cyan-100 transition hover:border-cyan-200/50 hover:bg-cyan-300/15"
+                >
+                  Push gate update
+                </button>
               </div>
             ))}
           </div>
@@ -97,7 +115,16 @@ export function EmergencyCenterPage() {
           <h2 className="text-lg font-semibold text-white">Incident Queue</h2>
           <div className="mt-4 space-y-3">
             {alerts.map((alert) => (
-              <div key={alert.title} className="rounded-lg border border-white/10 bg-slate-950/35 p-4">
+              <button
+                key={alert.title}
+                type="button"
+                onClick={() => setSelectedIncident(alert.title)}
+                className={`w-full rounded-lg border p-4 text-left transition ${
+                  selectedIncident === alert.title
+                    ? "border-rose-200/40 bg-rose-300/10"
+                    : "border-white/10 bg-slate-950/35 hover:border-cyan-200/30"
+                }`}
+              >
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="font-semibold text-white">{alert.title}</p>
@@ -110,7 +137,7 @@ export function EmergencyCenterPage() {
                 <p className="mt-3 text-sm text-slate-300">
                   AI action: notify nearest team, update affected fan routes, and monitor density after dispatch.
                 </p>
-              </div>
+              </button>
             ))}
           </div>
         </GlassCard>
