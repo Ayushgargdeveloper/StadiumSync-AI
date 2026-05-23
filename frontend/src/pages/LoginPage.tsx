@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { LockKeyhole, Phone, ShieldCheck, TicketCheck } from "lucide-react";
+import { Fingerprint, LockKeyhole, Phone, Radar, ShieldCheck, TicketCheck } from "lucide-react";
 import { useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
@@ -10,8 +10,8 @@ type LocationState = {
 
 export function LoginPage() {
   const { ticket, loginWithPhone } = useAuth();
-  const [phoneNumber, setPhoneNumber] = useState("9876543210");
-  const [message, setMessage] = useState("Only verified ticket holders can access match guidance.");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [message, setMessage] = useState("Ticket, match, gate, and seat details unlock only after verification.");
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,31 +37,50 @@ export function LoginPage() {
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(34,211,238,0.20),transparent_30%),radial-gradient(circle_at_78%_20%,rgba(16,185,129,0.14),transparent_28%),linear-gradient(135deg,#05070c,#0b1424_52%,#05070c)]" />
       <div className="scan-grid pointer-events-none fixed inset-0 opacity-60" />
 
-      <section className="relative z-10 mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+      <section className="relative z-10 mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl items-center gap-8 lg:grid-cols-[1fr_0.9fr]">
         <div>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-sm font-semibold text-cyan-100">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-sm font-semibold text-cyan-100 shadow-glow">
             <ShieldCheck className="h-4 w-4" />
-            Ticket-holder security
+            Verified ticket access
           </div>
           <h1 className="max-w-3xl text-4xl font-semibold leading-tight text-white md:text-6xl">
-            StadiumSync AI starts with verified fan access.
+            Unlock your stadium route after ticket verification.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300">
-            Fans login with the booking phone number. If a match ticket exists,
-            the platform opens their ticket details, gate, route, and exact seat guidance.
+            Match details, gate assignment, route guidance, and seat location are hidden
+            until the booking phone number is verified against an active ticket.
           </p>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-3">
-            {[
-              ["Match", "Falcons vs Titans"],
-              ["Access", "Ticket holders"],
-              ["Guidance", "Gate to seat"]
-            ].map(([label, value]) => (
-              <div key={label} className="glass-panel rounded-lg p-4">
-                <p className="text-xs text-slate-400">{label}</p>
-                <p className="mt-2 text-sm font-semibold text-white">{value}</p>
+          <div className="relative mt-8 overflow-hidden rounded-lg border border-cyan-300/20 bg-slate-950/45 p-5 backdrop-blur-2xl">
+            <div className="scan-grid absolute inset-0 opacity-60" />
+            <div className="relative mx-auto aspect-square max-w-[360px]">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 rounded-full border border-dashed border-cyan-200/25"
+              />
+              <div className="absolute inset-[10%] rounded-full border border-white/10 bg-white/[0.03]" />
+              <div className="absolute inset-[25%] rounded-full border border-cyan-300/20 bg-cyan-300/5" />
+              <div className="absolute inset-[42%] rounded-full border border-emerald-300/25 bg-emerald-300/10" />
+              {[
+                ["Ticket", "Locked", "left-[50%] top-[18%]"],
+                ["Gate", "Hidden", "left-[78%] top-[50%]"],
+                ["Seat", "Hidden", "left-[50%] top-[82%]"],
+                ["Route", "Hidden", "left-[22%] top-[50%]"]
+              ].map(([label, value, position]) => (
+                <div
+                  key={label}
+                  className={`absolute ${position} -translate-x-1/2 -translate-y-1/2 rounded-lg border border-white/10 bg-black/45 px-3 py-2 text-center shadow-lg backdrop-blur`}
+                >
+                  <p className="text-[0.68rem] uppercase tracking-[0.16em] text-slate-500">{label}</p>
+                  <p className="mt-1 text-xs font-semibold text-cyan-100">{value}</p>
+                </div>
+              ))}
+              <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100">
+                <Radar className="h-4 w-4" />
+                Secure checkpoint
               </div>
-            ))}
+            </div>
           </div>
         </div>
 
@@ -76,12 +95,23 @@ export function LoginPage() {
           <div className="relative">
             <div className="mb-6 flex items-center gap-3">
               <div className="rounded-lg bg-cyan-300/15 p-3 text-cyan-200 shadow-glow">
-                <LockKeyhole className="h-6 w-6" />
+                <Fingerprint className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-semibold text-white">Secure Login</h2>
-                <p className="text-sm text-slate-400">Verify by booking phone number</p>
+                <h2 className="text-2xl font-semibold text-white">Ticket Verification</h2>
+                <p className="text-sm text-slate-400">Private access for ticket holders</p>
               </div>
+            </div>
+
+            <div className="mb-5 rounded-lg border border-white/10 bg-white/[0.045] p-4">
+              <div className="flex items-center gap-2 text-sm font-semibold text-white">
+                <LockKeyhole className="h-4 w-4 text-emerald-200" />
+                Protected before reveal
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-400">
+                We do not show match, ticket, gate, or seat details until the booking
+                number is verified.
+              </p>
             </div>
 
             <label className="block text-sm font-medium text-slate-300" htmlFor="login-phone">
@@ -111,7 +141,7 @@ export function LoginPage() {
               {message}
             </p>
             <p className="mt-3 text-xs leading-5 text-slate-500">
-              Demo numbers: 9876543210, 9123456780, 9988776655
+              Presenter demo access: 9876543210, 9123456780, 9988776655
             </p>
           </div>
         </motion.form>
