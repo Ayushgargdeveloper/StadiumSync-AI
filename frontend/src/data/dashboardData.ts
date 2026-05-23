@@ -94,10 +94,46 @@ export const alerts = [
 ];
 
 export const agents = [
-  { name: "Flow Sentinel", status: "Active", task: "Predicting exit pressure" },
-  { name: "Evac Planner", status: "Standby", task: "Route simulation ready" },
-  { name: "Weather Watch", status: "Active", task: "Lightning envelope scan" },
-  { name: "Dispatch Copilot", status: "Active", task: "Team allocation" }
+  {
+    name: "Flow Sentinel",
+    status: "Active",
+    task: "Predicting exit pressure",
+    inputs: "Ticket scans, camera density, gate throughput",
+    action: "Divert Section 118 late arrivals to Gate D",
+    confidence: "96%"
+  },
+  {
+    name: "Evac Planner",
+    status: "Ready",
+    task: "Route simulation ready",
+    inputs: "Open exits, blocked lanes, response team locations",
+    action: "Keep East tunnel clear for medical lane",
+    confidence: "91%"
+  },
+  {
+    name: "Weather Watch",
+    status: "Active",
+    task: "Lightning envelope scan",
+    inputs: "Rain radar, wind, open seating exposure",
+    action: "Prefer covered concourse route for upper deck",
+    confidence: "88%"
+  },
+  {
+    name: "Dispatch Copilot",
+    status: "Active",
+    task: "Team allocation",
+    inputs: "Incidents, severity, nearest team, crowd pressure",
+    action: "Move Medical Alpha to Section 118",
+    confidence: "94%"
+  },
+  {
+    name: "Ticket Router",
+    status: "Active",
+    task: "Fan route personalization",
+    inputs: "Seat section, gate load, walking time, weather risk",
+    action: "Update fan route guidance before congestion forms",
+    confidence: "93%"
+  }
 ];
 
 export const weatherRisks = [

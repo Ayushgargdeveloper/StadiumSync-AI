@@ -53,6 +53,7 @@ a5c1071 Phase 0 repo baseline
   - Weather Risk
   - Logs
 - Firebase-ready monorepo scaffold with separated `frontend/` and `backend/`
+- Firebase Functions mock API scaffold for ticket lookup, agent recommendations, and match zones
 - Environment templates through `.env.example` files
 
 ## Important Files
@@ -123,6 +124,12 @@ Verify the frontend production build:
 
 ```powershell
 npm run build --workspace frontend
+```
+
+Verify full project build:
+
+```powershell
+npm run build
 ```
 
 ## Next Recommended Phase

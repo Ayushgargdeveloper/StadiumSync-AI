@@ -217,6 +217,8 @@ Demo proof:
 
 Goal: win innovation and agentic depth points.
 
+Status: Completed.
+
 AI agents to show:
 
 - Flow Sentinel: predicts bottlenecks and recommends gate diversions.
@@ -231,6 +233,12 @@ Tasks:
 - Add "agent recommendation log."
 - Show how agents collaborate.
 
+Delivered:
+
+- AI Agents page now shows signal inputs, recommended actions, confidence, and collaborative roles.
+- Added Ticket Router agent for fan route personalization.
+- Agent story now connects ticketing, density, weather, dispatch, and routing.
+
 Demo proof:
 
 - Open `/ai-agents`.
@@ -239,6 +247,8 @@ Demo proof:
 ## Phase 5: Backend API Scaffold
 
 Goal: move from frontend dummy data toward production architecture.
+
+Status: Completed as mock scaffold.
 
 Technology:
 
@@ -262,6 +272,11 @@ Tasks:
 - Add mock backend responses.
 - Frontend API client can fall back to dummy data if backend unavailable.
 
+Delivered:
+
+- Firebase Functions mock endpoints added for health, ticket lookup, agent recommendations, and match zones.
+- Backend TypeScript builds successfully.
+
 Demo proof:
 
 - Health endpoint works.
@@ -270,6 +285,8 @@ Demo proof:
 ## Phase 6: Firebase/GCP Deployment
 
 Goal: get deployment points and stable live demo URL.
+
+Status: Ready, blocked until Firebase project/account is configured.
 
 Tasks:
 

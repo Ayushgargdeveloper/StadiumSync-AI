@@ -1,37 +1,68 @@
+import { Ambulance, Radio, ShieldAlert } from "lucide-react";
 import { GlassCard } from "../components/ui/GlassCard";
 import { PageHeader } from "../components/ui/PageHeader";
-import { alerts } from "../data/dashboardData";
+import { alerts, responseAutomations } from "../data/dashboardData";
 
 export function EmergencyCenterPage() {
   return (
     <div>
       <PageHeader
         eyebrow="Emergency center"
-        title="Incident response coordination"
-        description="Dispatch dummy teams, monitor active events, and keep response status visible for operators."
+        title="Automated response coordination"
+        description="Convert live incidents into dispatch actions, volunteer instructions, and fan route updates before small problems become stadium-wide risks."
       />
-      <section className="grid gap-5 xl:grid-cols-[0.9fr_1.1fr]">
+
+      <section className="grid gap-4 md:grid-cols-3">
+        {responseAutomations.map((automation) => (
+          <GlassCard key={automation.label}>
+            <p className="text-sm text-slate-400">{automation.label}</p>
+            <p className="mt-2 text-2xl font-semibold text-white">{automation.value}</p>
+            <p className="mt-2 text-sm font-semibold text-emerald-200">{automation.status}</p>
+          </GlassCard>
+        ))}
+      </section>
+
+      <section className="mt-5 grid gap-5 xl:grid-cols-[0.9fr_1.1fr]">
         <GlassCard>
           <h2 className="text-lg font-semibold text-white">Response Teams</h2>
           <div className="mt-4 space-y-3">
-            {["Medical Alpha", "Security Delta", "Fire Watch", "Gate Control"].map((team) => (
-              <div key={team} className="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.04] p-3">
-                <span className="font-medium text-white">{team}</span>
+            {[
+              ["Medical Alpha", "Section 118 tunnel", Ambulance],
+              ["Security Delta", "East Concourse split", ShieldAlert],
+              ["Gate Control", "Gate D bypass", Radio]
+            ].map(([team, location, Icon]) => (
+              <div key={team as string} className="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.04] p-3">
+                <div className="flex items-center gap-3">
+                  <Icon className="h-5 w-5 text-cyan-200" />
+                  <div>
+                    <p className="font-medium text-white">{team as string}</p>
+                    <p className="text-sm text-slate-400">{location as string}</p>
+                  </div>
+                </div>
                 <span className="rounded-full bg-emerald-300/10 px-2 py-1 text-xs font-semibold text-emerald-200">
-                  Ready
+                  Routed
                 </span>
               </div>
             ))}
           </div>
         </GlassCard>
-        <GlassCard>
+
+        <GlassCard className="bg-gradient-to-br from-rose-300/[0.07] to-white/[0.035]">
           <h2 className="text-lg font-semibold text-white">Incident Queue</h2>
           <div className="mt-4 space-y-3">
             {alerts.map((alert) => (
               <div key={alert.title} className="rounded-lg border border-white/10 bg-slate-950/35 p-4">
-                <p className="font-semibold text-white">{alert.title}</p>
-                <p className="mt-1 text-sm text-slate-400">
-                  {alert.area} · {alert.time}
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="font-semibold text-white">{alert.title}</p>
+                    <p className="mt-1 text-sm text-slate-400">{alert.area} - {alert.time}</p>
+                  </div>
+                  <span className="rounded-full border border-amber-300/20 bg-amber-300/10 px-2 py-1 text-xs font-semibold text-amber-100">
+                    {alert.severity}
+                  </span>
+                </div>
+                <p className="mt-3 text-sm text-slate-300">
+                  AI action: notify nearest team, update affected fan routes, and monitor density after dispatch.
                 </p>
               </div>
             ))}
