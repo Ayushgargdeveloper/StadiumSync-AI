@@ -158,6 +158,8 @@ Exit criteria:
 
 Goal: make the live demo feel complete and judge-ready.
 
+Status: Completed.
+
 Tasks:
 
 - Make login page visually sharper and problem-aligned.
@@ -165,6 +167,13 @@ Tasks:
 - Add small safety/advisory panel: best arrival time, avoid congested gate, weather note.
 - Add clear "This reduces bottlenecks" messaging without making it look like a marketing page.
 - Ensure mobile and desktop layouts do not overlap.
+
+Delivered:
+
+- Fan Guide hero now explains congestion reduction.
+- Active ticket panel highlights verified access and entry window.
+- Safety advisory cards show best arrival, queue avoidance, and weather note.
+- Ticket navigator copy now explains density-aware routing.
 
 Demo proof:
 

@@ -44,11 +44,12 @@ export function TicketSeatGuide({ mode = "demo" }: TicketSeatGuideProps) {
             Fan ticket navigator
           </p>
           <h2 className="mt-2 text-2xl font-semibold text-white">
-            Login, fetch ticket, get to the seat
+            Follow the safest path from gate to seat
           </h2>
           <p className="mt-3 text-sm leading-6 text-slate-300">
             StadiumSync AI uses the verified ticket to show the correct gate,
-            section, route, nearby facilities, and seat guidance.
+            section, route, nearby facilities, and seat guidance. The same routing
+            can update when crowd density, security, or weather conditions change.
           </p>
 
           <div className="mt-5 rounded-lg border border-cyan-300/20 bg-slate-950/55 p-4">
@@ -98,7 +99,7 @@ export function TicketSeatGuide({ mode = "demo" }: TicketSeatGuideProps) {
           )}
 
           <label className="mt-5 block text-sm font-medium text-slate-300" htmlFor="ticket-section">
-            Manual section preview
+            Section preview
           </label>
           <select
             id="ticket-section"
@@ -246,7 +247,7 @@ export function TicketSeatGuide({ mode = "demo" }: TicketSeatGuideProps) {
               </div>
               <p className="mt-2 text-sm leading-6 text-slate-300">
                 {routeMode
-                  ? `Enter from ${selectedTicket.gate}, scan at security, follow signs to ${selectedTicket.aisle}, then continue to ${activeTicket?.seat ?? `Section ${selectedTicket.section}`}.`
+                  ? `Enter from ${selectedTicket.gate}, scan at security, follow signs to ${selectedTicket.aisle}, then continue to ${activeTicket?.seat ?? `Section ${selectedTicket.section}`}. If density rises, this route can be diverted before the concourse becomes crowded.`
                   : selectedTicket.note}
               </p>
             </div>

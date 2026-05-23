@@ -209,3 +209,21 @@ export const bookedTickets = [
     entryWindow: "5:55 PM - 6:30 PM"
   }
 ] as const;
+
+export const fanSafetyAdvisories = [
+  {
+    label: "Best arrival",
+    value: "6:15 PM",
+    detail: "Arrive inside your verified entry window to reduce surge pressure."
+  },
+  {
+    label: "Avoid",
+    value: "Gate B queue",
+    detail: "AI predicts slower movement near central plaza before kickoff."
+  },
+  {
+    label: "Weather note",
+    value: "Light rain watch",
+    detail: "Covered concourse path is preferred for this section."
+  }
+] as const;
