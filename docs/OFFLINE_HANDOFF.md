@@ -14,6 +14,7 @@ This file exists so the project can continue from the same point even if the Cod
 - Post-login front page: `/` Fan Guide with ticket and seat navigation
 - Judge/problem alignment plan: `docs/JUDGE_ALIGNMENT_AND_245_PLAN.md`
 - Phase roadmap: `docs/PHASE_ROADMAP.md`
+- GCP/API/deployment strategy: `docs/GCP_API_AND_DEPLOYMENT_STRATEGY.md`
 
 ## Completed Commits
 
@@ -130,6 +131,7 @@ Immediate priority before 2:45 PM:
 
 - Follow `docs/JUDGE_ALIGNMENT_AND_245_PLAN.md`.
 - Execute phase-by-phase using `docs/PHASE_ROADMAP.md`.
+- Use `docs/GCP_API_AND_DEPLOYMENT_STRATEGY.md` for real API and deployment decisions.
 - Keep the demo centered on: secure ticket login -> Fan Guide -> Get to my seat -> Operations command center.
 - Align every feature to the shared problem statement:
   - dangerous bottlenecks,

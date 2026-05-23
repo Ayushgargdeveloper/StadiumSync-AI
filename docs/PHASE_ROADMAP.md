@@ -48,6 +48,7 @@ Why:
 - Good for serverless APIs.
 - Easy future integration with Firestore, Auth, Cloud Messaging, and Google Cloud APIs.
 - Strong enough for hackathon technical defense.
+- Server-side place to safely use Google Cloud credits and API keys.
 
 Backend responsibilities:
 
@@ -101,6 +102,19 @@ GCP Portal talking points:
 - Functions run on Google Cloud serverless infrastructure.
 - Firestore is the real-time operational database.
 - Future AI integration can use Vertex AI / Gemini APIs.
+- Google Maps Routes API can be added through Functions for real parking-to-gate navigation.
+
+### Real Google Cloud Data Strategy
+
+Use Google Cloud APIs through the backend, not the frontend:
+
+- Firebase Auth phone OTP for real ticket-holder login.
+- Firestore for real tickets, match data, incidents, zones, and logs.
+- Firebase Functions for secure ticket lookup and role-aware APIs.
+- Vertex AI / Gemini for AI agent recommendations and response summaries.
+- Google Maps Routes API for parking-to-gate or external arrival routing if credits allow.
+
+Keep dummy fallback data for live demo stability.
 
 ## Phase 0: Completed Foundation
 
@@ -303,6 +317,16 @@ Live demo script:
 4. Phase 5: add backend API scaffold if time allows.
 5. Phase 6: deploy to Firebase/GCP.
 6. Phase 7: rehearse pitch.
+
+## Required After Every Phase
+
+1. Optimize UI and wording around the problem statement.
+2. Run `npm run build --workspace frontend`.
+3. Refresh/open `http://127.0.0.1:5173/` in the in-app browser.
+4. Smoke test the changed route.
+5. Update handoff docs if direction changed.
+6. Commit the phase.
+7. Push if GitHub remote exists.
 
 ## What Not To Do Before Demo
 
