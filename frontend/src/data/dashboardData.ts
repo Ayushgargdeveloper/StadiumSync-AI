@@ -16,6 +16,9 @@ import {
 export const topbarStats = {
   stadiumStatus: "Operational",
   matchName: "Falcons vs Titans",
+  liveScore: "Falcons 142/3",
+  matchOver: "16.2 ov",
+  chaseInfo: "Titans need 41 from 22",
   crowdCount: "68,420",
   activeAlerts: 4
 };

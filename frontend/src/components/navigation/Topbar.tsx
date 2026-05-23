@@ -1,4 +1,4 @@
-import { Activity, Bell, ShieldCheck, Trophy, UsersRound } from "lucide-react";
+import { Bell, Radio, ShieldCheck, Trophy, UsersRound } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { topbarStats } from "../../data/dashboardData";
@@ -43,12 +43,20 @@ export function Topbar() {
     <header className="sticky top-0 z-20 border-b border-white/10 bg-cockpit/65 px-4 py-3 backdrop-blur-2xl sm:px-6 lg:px-8">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
-            <Activity className="h-4 w-4" />
-            Live command center
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-200">
+              <Radio className="h-4 w-4" />
+              Live score
+            </div>
+            <div className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-sm font-semibold text-white">
+              {topbarStats.liveScore}
+            </div>
+            <div className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-semibold text-slate-300">
+              {topbarStats.matchOver}
+            </div>
           </div>
           <p className="mt-1 text-sm text-slate-400">
-            {ticket ? `${ticket.holder} - ${ticket.seat}` : "AI-assisted stadium safety and fan guidance"}
+            {ticket ? `${topbarStats.chaseInfo} - ${ticket.holder} - ${ticket.seat}` : topbarStats.chaseInfo}
           </p>
         </div>
 
