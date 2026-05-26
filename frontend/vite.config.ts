@@ -15,6 +15,11 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true
         }
       }
+    },
+    preview: {
+      allowedHosts: [
+        "stadiumsync-ai-329414830213.us-central1.run.app"
+      ]
     }
   };
 });

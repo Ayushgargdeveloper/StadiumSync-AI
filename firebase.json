@@ -1,6 +1,9 @@
 {
   "hosting": {
     "public": "frontend/dist",
+    "predeploy": [
+      "npm run build --workspace frontend"
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -20,7 +23,10 @@
   "functions": [
     {
       "source": "backend",
-      "codebase": "default"
+      "codebase": "default",
+      "predeploy": [
+        "npm run build --workspace backend"
+      ]
     }
   ],
   "emulators": {

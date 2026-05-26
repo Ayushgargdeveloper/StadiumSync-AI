@@ -7,14 +7,16 @@ This file exists so the project can continue from the same point even if the Cod
 - Workspace: `C:\Users\pc\OneDrive\Documents\StadiumSync Ai`
 - Branch: `master`
 - Latest commit: run `git log --oneline -5` for the newest local checkpoint
-- Working tree at handoff: clean
+- Working tree at handoff: clean after the newest local commit
 - GitHub remote: not configured yet
 - Frontend dev server: Vite on `http://127.0.0.1:5173/`
+- GCP Cloud Run URL used during deployment: `https://stadiumsync-ai-329414830213.us-central1.run.app`
 - App entry: `/login`
 - Post-login front page: `/` Fan Guide with ticket and seat navigation
 - Judge/problem alignment plan: `docs/JUDGE_ALIGNMENT_AND_245_PLAN.md`
 - Phase roadmap: `docs/PHASE_ROADMAP.md`
 - GCP/API/deployment strategy: `docs/GCP_API_AND_DEPLOYMENT_STRATEGY.md`
+- GCP/Firebase deploy checklist: `docs/GCP_FIREBASE_DEPLOYMENT.md`
 
 ## Completed Commits
 
@@ -63,6 +65,8 @@ a5c1071 Phase 0 repo baseline
 - Firebase-ready monorepo scaffold with separated `frontend/` and `backend/`
 - Firebase Functions mock API scaffold for ticket lookup, agent recommendations, and match zones
 - Environment templates through `.env.example` files
+- Firebase deploy scripts and predeploy build hooks in `package.json` and `firebase.json`
+- Cloud Run Vite preview host allowlist in `frontend/vite.config.ts`
 
 ## Important Files
 
@@ -148,6 +152,17 @@ All app routes were opened in the browser without runtime/404 errors.
 Topbar Alerts button navigates to /emergency-center.
 Help SOS button shows the SOS logged confirmation.
 Emergency broadcast button updates the broadcast package to sent.
+On 2026-05-27, local dev server was restarted and returned HTTP 200 at http://127.0.0.1:5173/.
+```
+
+Cloud Run note:
+
+```text
+If Cloud Run shows "Blocked request. This host is not allowed", make sure the deployed hostname is listed in frontend/vite.config.ts under preview.allowedHosts, then redeploy from Cloud Shell:
+
+cd ~/StadiumSync-ai/frontend
+npm pkg set scripts.start="vite preview --host 0.0.0.0 --port \${PORT}"
+gcloud run deploy stadiumsync-ai --source . --region us-central1 --allow-unauthenticated
 ```
 
 ## Next Recommended Phase

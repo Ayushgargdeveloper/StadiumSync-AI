@@ -11,9 +11,15 @@
     "build": "npm run build --workspace frontend && npm run build --workspace backend",
     "lint": "npm run lint --workspace frontend && npm run lint --workspace backend",
     "firebase:emulators": "firebase emulators:start",
-    "firebase:deploy": "firebase deploy"
+    "firebase:deploy": "firebase deploy",
+    "firebase:deploy:hosting": "firebase deploy --only hosting",
+    "firebase:deploy:functions": "firebase deploy --only functions",
+    "firebase:preview": "firebase hosting:channel:deploy preview"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "firebase-tools": "^15.18.0"
   }
 }
