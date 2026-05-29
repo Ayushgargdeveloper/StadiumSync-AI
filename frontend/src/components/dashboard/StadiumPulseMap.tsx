@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Activity, MapPin } from "lucide-react";
+import { Activity, MapPin, Navigation2 } from "lucide-react";
 import { zones } from "../../data/dashboardData";
 
 const zonePoints = [
@@ -11,7 +11,7 @@ const zonePoints = [
 
 export function StadiumPulseMap() {
   return (
-    <div className="relative min-h-[360px] overflow-hidden rounded-lg border border-cyan-300/20 bg-slate-950/45 p-5">
+    <div className="relative min-h-[420px] overflow-hidden rounded-lg border border-cyan-300/20 bg-slate-950/45 p-5">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_34%),linear-gradient(120deg,rgba(14,165,233,0.10),rgba(168,85,247,0.08),rgba(16,185,129,0.10))]" />
       <div className="scan-grid absolute inset-0 opacity-70" />
 
@@ -27,7 +27,27 @@ export function StadiumPulseMap() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-8 aspect-square max-w-[360px]">
+      <div className="relative z-10 mx-auto mt-8 aspect-square max-w-[420px]">
+        <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" aria-hidden="true">
+          <path
+            className="orbit-dash"
+            d="M50 8 C72 10 91 28 92 50 C91 72 72 90 50 92 C28 90 9 72 8 50 C9 28 28 10 50 8Z"
+            fill="none"
+            stroke="rgba(125, 211, 252, 0.42)"
+            strokeDasharray="8 5"
+            strokeLinecap="round"
+            strokeWidth="0.8"
+          />
+          <path
+            className="orbit-dash"
+            d="M50 22 C63 23 77 36 78 50 C77 64 63 77 50 78 C37 77 23 64 22 50 C23 36 37 23 50 22Z"
+            fill="none"
+            stroke="rgba(110, 231, 183, 0.36)"
+            strokeDasharray="5 4"
+            strokeLinecap="round"
+            strokeWidth="0.7"
+          />
+        </svg>
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
@@ -38,6 +58,8 @@ export function StadiumPulseMap() {
         <div className="absolute inset-[38%] rounded-full border border-emerald-200/30 bg-emerald-300/10" />
         <div className="absolute left-1/2 top-1/2 h-[68%] w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 bg-slate-950/50" />
         <div className="absolute left-1/2 top-1/2 h-8 w-[68%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 bg-slate-950/50" />
+        <div className="absolute left-[13%] top-[47%] h-2 w-[74%] -rotate-12 rounded-full bg-gradient-to-r from-transparent via-emerald-300/45 to-transparent" />
+        <div className="absolute left-[24%] top-[62%] h-2 w-[52%] rotate-[28deg] rounded-full bg-gradient-to-r from-transparent via-amber-300/35 to-transparent" />
 
         {zonePoints.map((point, index) => (
           <motion.div
@@ -57,6 +79,10 @@ export function StadiumPulseMap() {
         <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-black/35 px-3 py-1 text-xs text-slate-200 backdrop-blur">
           <Activity className="h-3.5 w-3.5 text-cyan-200" />
           248 vision nodes
+        </div>
+        <div className="absolute left-1/2 top-[64%] flex -translate-x-1/2 items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs font-semibold text-emerald-100">
+          <Navigation2 className="h-3.5 w-3.5" />
+          Gate D bypass open
         </div>
       </div>
 

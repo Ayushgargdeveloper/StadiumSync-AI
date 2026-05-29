@@ -1,39 +1,55 @@
-import { Bell, Radio, ShieldCheck, Trophy, UsersRound } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Bell, Radio, ShieldCheck, Trophy, UsersRound, Waves } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
-import { topbarStats } from "../../data/dashboardData";
-
-const statusItems = [
-  {
-    label: "Status",
-    value: topbarStats.stadiumStatus,
-    icon: ShieldCheck,
-    className: "text-emerald-200"
-  },
-  {
-    label: "Match",
-    value: topbarStats.matchName,
-    icon: Trophy,
-    className: "text-cyan-200"
-  },
-  {
-    label: "Crowd",
-    value: topbarStats.crowdCount,
-    icon: UsersRound,
-    className: "text-blue-200"
-  },
-  {
-    label: "Alerts",
-    value: String(topbarStats.activeAlerts),
-    icon: Bell,
-    className: "text-amber-200",
-    path: "/emergency-center"
-  }
-];
+import { fallbackVenueStatus, fetchVenueStatus } from "../../utils/liveData";
 
 export function Topbar() {
   const { ticket, logout } = useAuth();
   const navigate = useNavigate();
+  const [topbarStats, setTopbarStats] = useState(() => fallbackVenueStatus());
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetchVenueStatus().then((data) => {
+      if (isMounted) {
+        setTopbarStats(data);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const statusItems = [
+    {
+      label: "Status",
+      value: topbarStats.stadiumStatus,
+      icon: ShieldCheck,
+      className: "text-emerald-200"
+    },
+    {
+      label: "Match",
+      value: topbarStats.matchName,
+      icon: Trophy,
+      className: "text-cyan-200"
+    },
+    {
+      label: "Crowd",
+      value: topbarStats.crowdCount,
+      icon: UsersRound,
+      className: "text-blue-200"
+    },
+    {
+      label: "Alerts",
+      value: String(topbarStats.activeAlerts),
+      icon: Bell,
+      className: "text-amber-200",
+      path: "/emergency-center"
+    }
+  ];
 
   function handleLogout() {
     logout();
@@ -59,6 +75,16 @@ export function Topbar() {
           <p className="mt-1 text-sm text-slate-400">
             {ticket ? `${topbarStats.chaseInfo} - ${ticket.holder} - ${ticket.seat}` : topbarStats.chaseInfo}
           </p>
+          <div className="mt-3 flex max-w-xl items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-slate-300">
+            <Waves className="h-3.5 w-3.5 text-emerald-200" />
+            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-cyan-300 via-emerald-200 to-amber-200"
+                style={{ width: `${topbarStats.venuePulse}%` }}
+              />
+            </div>
+            <span className="font-semibold text-cyan-100">Venue pulse {topbarStats.venuePulse}%</span>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-2 md:grid-cols-5 xl:min-w-[680px]">

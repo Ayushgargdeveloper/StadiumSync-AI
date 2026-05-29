@@ -74,6 +74,37 @@ export const zones = [
   { name: "West Plaza", density: 64, risk: "Low", trend: "+1%" }
 ];
 
+export const crowdAnalyticsSeries = [
+  {
+    zone: "North Gate",
+    currentFlow: "8.6k/hr",
+    peakEta: "14 min",
+    intervention: "Lane splitters",
+    points: [48, 52, 58, 61, 66, 69, 74]
+  },
+  {
+    zone: "East Concourse",
+    currentFlow: "13.8k/hr",
+    peakEta: "9 min",
+    intervention: "Gate D bypass",
+    points: [62, 68, 73, 79, 84, 89, 92]
+  },
+  {
+    zone: "South Stands",
+    currentFlow: "10.1k/hr",
+    peakEta: "18 min",
+    intervention: "Hold merch queue",
+    points: [86, 84, 83, 82, 82, 81, 81]
+  },
+  {
+    zone: "West Plaza",
+    currentFlow: "6.9k/hr",
+    peakEta: "22 min",
+    intervention: "Monitor only",
+    points: [55, 57, 60, 61, 62, 63, 64]
+  }
+] as const;
+
 export const alerts = [
   {
     title: "Density spike detected",

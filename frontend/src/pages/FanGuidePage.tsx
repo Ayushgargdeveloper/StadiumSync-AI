@@ -1,4 +1,5 @@
-import { ShieldCheck, TicketCheck } from "lucide-react";
+import { Footprints, ShieldCheck, TicketCheck, TimerReset } from "lucide-react";
+import { Fragment } from "react";
 import { useAuth } from "../auth/AuthContext";
 import { TicketSeatGuide } from "../components/dashboard/TicketSeatGuide";
 import { GlassCard } from "../components/ui/GlassCard";
@@ -35,6 +36,34 @@ export function FanGuidePage() {
                 <p className="mt-2 text-sm font-semibold text-white">{value}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-5 rounded-lg border border-white/10 bg-black/25 p-4">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-2 text-sm font-semibold text-white">
+                <Footprints className="h-4 w-4 text-emerald-200" />
+                Live walk plan
+              </div>
+              <div className="flex items-center gap-2 text-xs font-semibold text-cyan-100">
+                <TimerReset className="h-3.5 w-3.5" />
+                Updates in 42s
+              </div>
+            </div>
+            <div className="mt-4 grid grid-cols-[auto_1fr_auto_1fr_auto] items-center gap-2 text-xs font-semibold text-slate-300">
+              {["Gate", "Security", "Seat"].map((step, index) => (
+                <Fragment key={step}>
+                  <span
+                    className="grid h-8 w-8 place-items-center rounded-full border border-cyan-300/30 bg-cyan-300/10 text-cyan-100"
+                  >
+                    {index + 1}
+                  </span>
+                  {index < 2 && (
+                    <span
+                      className="h-1 rounded-full bg-gradient-to-r from-cyan-300 via-emerald-200 to-amber-200"
+                    />
+                  )}
+                </Fragment>
+              ))}
+            </div>
           </div>
         </div>
 

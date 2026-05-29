@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Ambulance, BellRing, CheckCircle2, Flame, Radio, Send, ShieldAlert } from "lucide-react";
 import { GlassCard } from "../components/ui/GlassCard";
 import { PageHeader } from "../components/ui/PageHeader";
-import { alerts, emergencyBroadcasts, gateEmergencyUpdates, responseAutomations } from "../data/dashboardData";
+import { fallbackEmergencyFeed, fetchEmergencyFeed } from "../utils/liveData";
 
 export function EmergencyCenterPage() {
+  const [emergencyFeed, setEmergencyFeed] = useState(() => fallbackEmergencyFeed());
   const [broadcastSent, setBroadcastSent] = useState(false);
-  const [selectedIncident, setSelectedIncident] = useState(alerts[0].title);
+  const [selectedIncident, setSelectedIncident] = useState(emergencyFeed.alerts[0].title);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetchEmergencyFeed().then((data) => {
+      if (isMounted) {
+        setEmergencyFeed(data);
+        setSelectedIncident(data.alerts[0]?.title ?? "");
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div>
@@ -15,9 +31,17 @@ export function EmergencyCenterPage() {
         title="Automated response coordination"
         description="Convert live incidents into dispatch actions, volunteer instructions, and fan route updates before small problems become stadium-wide risks."
       />
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-100">
+          Data source: {emergencyFeed.source}
+        </span>
+        <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs text-slate-300">
+          Updated {new Date(emergencyFeed.updatedAt).toLocaleTimeString()}
+        </span>
+      </div>
 
       <section className="grid gap-4 md:grid-cols-3">
-        {responseAutomations.map((automation) => (
+        {emergencyFeed.automations.map((automation) => (
           <GlassCard key={automation.label}>
             <p className="text-sm text-slate-400">{automation.label}</p>
             <p className="mt-2 text-2xl font-semibold text-white">{automation.value}</p>
@@ -44,7 +68,7 @@ export function EmergencyCenterPage() {
             {broadcastSent ? "Broadcast package sent" : "Send emergency broadcast package"}
           </button>
           <div className="mt-4 space-y-3">
-            {emergencyBroadcasts.map((broadcast) => (
+            {emergencyFeed.broadcasts.map((broadcast) => (
               <div key={broadcast.audience} className="rounded-lg border border-white/10 bg-black/25 p-3">
                 <div className="flex items-start justify-between gap-3">
                   <div>
@@ -67,7 +91,7 @@ export function EmergencyCenterPage() {
             <Flame className="h-6 w-6 text-amber-200" />
           </div>
           <div className="mt-4 space-y-3">
-            {gateEmergencyUpdates.map((gate) => (
+            {emergencyFeed.gates.map((gate) => (
               <div key={gate.gate} className="rounded-lg border border-white/10 bg-white/[0.045] p-3">
                 <div className="flex items-center justify-between">
                   <p className="font-semibold text-white">{gate.gate}</p>
@@ -90,31 +114,32 @@ export function EmergencyCenterPage() {
         <GlassCard>
           <h2 className="text-lg font-semibold text-white">Response Teams</h2>
           <div className="mt-4 space-y-3">
-            {[
-              ["Medical Alpha", "Section 118 tunnel", Ambulance],
-              ["Security Delta", "East Concourse split", ShieldAlert],
-              ["Gate Control", "Gate D bypass", Radio]
-            ].map(([team, location, Icon]) => (
-              <div key={team as string} className="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.04] p-3">
+            {emergencyFeed.teams.map((teamStatus) => {
+              const Icon =
+                teamStatus.team.includes("Medical") ? Ambulance : teamStatus.team.includes("Security") ? ShieldAlert : Radio;
+
+              return (
+              <div key={teamStatus.team} className="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.04] p-3">
                 <div className="flex items-center gap-3">
                   <Icon className="h-5 w-5 text-cyan-200" />
                   <div>
-                    <p className="font-medium text-white">{team as string}</p>
-                    <p className="text-sm text-slate-400">{location as string}</p>
+                    <p className="font-medium text-white">{teamStatus.team}</p>
+                    <p className="text-sm text-slate-400">{teamStatus.location}</p>
                   </div>
                 </div>
                 <span className="rounded-full bg-emerald-300/10 px-2 py-1 text-xs font-semibold text-emerald-200">
-                  Routed
+                  {teamStatus.status}
                 </span>
               </div>
-            ))}
+              );
+            })}
           </div>
         </GlassCard>
 
         <GlassCard className="bg-gradient-to-br from-rose-300/[0.07] to-white/[0.035]">
           <h2 className="text-lg font-semibold text-white">Incident Queue</h2>
           <div className="mt-4 space-y-3">
-            {alerts.map((alert) => (
+            {emergencyFeed.alerts.map((alert) => (
               <button
                 key={alert.title}
                 type="button"

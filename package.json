@@ -12,6 +12,7 @@
     "lint": "npm run lint --workspace frontend && npm run lint --workspace backend",
     "firebase:emulators": "firebase emulators:start",
     "firebase:deploy": "firebase deploy",
+    "firebase:deploy:static": "firebase deploy --only hosting --config firebase.static.json",
     "firebase:deploy:hosting": "firebase deploy --only hosting",
     "firebase:deploy:functions": "firebase deploy --only functions",
     "firebase:preview": "firebase hosting:channel:deploy preview"

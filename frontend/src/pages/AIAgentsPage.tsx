@@ -1,9 +1,26 @@
+import { useEffect, useState } from "react";
 import { BrainCircuit, GitBranch, RadioTower } from "lucide-react";
 import { GlassCard } from "../components/ui/GlassCard";
 import { PageHeader } from "../components/ui/PageHeader";
-import { agents } from "../data/dashboardData";
+import { fallbackAgentFeed, fetchAgentFeed } from "../utils/liveData";
 
 export function AIAgentsPage() {
+  const [agentFeed, setAgentFeed] = useState(() => fallbackAgentFeed());
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetchAgentFeed().then((data) => {
+      if (isMounted) {
+        setAgentFeed(data);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <div>
       <PageHeader
@@ -11,12 +28,20 @@ export function AIAgentsPage() {
         title="Agentic matchday control system"
         description="Specialized agents collaborate across ticketing, crowd density, weather, and incident signals to recommend safer routes and faster response actions."
       />
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-100">
+          Data source: {agentFeed.source}
+        </span>
+        <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs text-slate-300">
+          Updated {new Date(agentFeed.updatedAt).toLocaleTimeString()}
+        </span>
+      </div>
 
       <section className="grid gap-4 md:grid-cols-3">
         {[
-          ["Signals fused", "7 live feeds", RadioTower],
-          ["Agent decisions", "18/min", BrainCircuit],
-          ["Human approvals", "4 pending", GitBranch]
+          ["Signals fused", agentFeed.summary.signalsFused, RadioTower],
+          ["Agent decisions", agentFeed.summary.agentDecisions, BrainCircuit],
+          ["Human approvals", agentFeed.summary.humanApprovals, GitBranch]
         ].map(([label, value, Icon]) => (
           <GlassCard key={label as string} className="flex items-center justify-between gap-4">
             <div>
@@ -29,7 +54,7 @@ export function AIAgentsPage() {
       </section>
 
       <section className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {agents.map((agent) => (
+        {agentFeed.agents.map((agent) => (
           <GlassCard key={agent.name} className="bg-gradient-to-br from-white/[0.07] to-cyan-300/[0.03]">
             <div className="flex items-center justify-between gap-3">
               <h2 className="font-semibold text-white">{agent.name}</h2>
